@@ -1,0 +1,17 @@
+.card-frame {
+    padding: 2px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #28a745, #8ef4a3, #ffffff);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.35);
+    margin: 1rem auto;
+    max-width: 650px;
+}
+
+.card-content {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

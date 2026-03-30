@@ -1,0 +1,124 @@
+<div class=" d-flex justify-content-center align-items-center flex-column mt-5">
+    <div class="col">
+        <h1 class="title">Ficha de Matrícula</h1>
+    </div>
+    <div class="card-frame">
+        <div class="card-content">
+            <div class="col">
+                <form action="" method="post" #formulario="ngForm" (ngSubmit)="enviar(formulario)">
+
+                    <label for="nome" class="form-label">Nome*</label>
+                    <input type="text" id="nome" name="nome" class="form-control form-control-sm" [(ngModel)]="nome"
+                        #propNome="ngModel" minlength="3" required
+                        [ngClass]="{'is-invalid': propNome.invalid && propNome.touched}">
+
+                    @if(propNome.invalid && propNome.touched) {
+                    <div class="invalid-feedback d-block">
+                        O nome deve conter pelo menos 3 caracteres.
+                    </div>}
+
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" class="form-control form-control-sm" [(ngModel)]="email"
+                        #propEmail="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        placeholder="aluno@ifes.com" [ngClass]="{'is-invalid': propEmail.invalid && propEmail.touched}">
+
+                    @if (propEmail.invalid && propEmail.touched) {
+                    <div class="invalid-feedback d-block">
+                        Por favor, insira um email válido.
+                    </div>
+                    }
+
+                    <label for="idade">Idade*</label>
+                    <input type="number" id="idade" name="idade" class="form-control form-control-sm"
+                        [(ngModel)]="idade" #propIdade="ngModel" min="18" required
+                        [ngClass]="{'is-invalid': propIdade.invalid && propIdade.touched}">
+
+                    @if (propIdade.invalid && propIdade.touched) {
+                    <div class="invalid-feedback d-block">
+                        A idade deve ser um número inteiro maior ou igual a 18.
+                    </div>
+                    }
+
+                    <label for="senha">Senha*</label>
+                    <input type="password" id="senha" name="senha" class="form-control form-control-sm"
+                        [(ngModel)]="senha" #propSenha="ngModel" required
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}"
+                        [ngClass]="{'is-invalid': propSenha.invalid && propSenha.touched}">
+                    <div class="form-text">
+                        Mínimo 6 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais
+                    </div>
+
+                    @if(propSenha.invalid && propSenha.touched) {
+                    <div class="invalid-feedback d-block">
+                        A senha deve conter pelo menos 6 caracteres, incluindo letras maiúsculas, minúsculas, números e
+                        caracteres especiais.
+                    </div>
+                    }
+
+                    <label for="confirm-senha" class="mt-2">Confirme a Senha*</label>
+                    <input type="password" id="confirm-senha" name="confirm-senha" class="form-control form-control-sm"
+                        [(ngModel)]="confirmSenha" #propConfirmSenha="ngModel" required
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}"
+                        [ngClass]="{'is-invalid': (propConfirmSenha.invalid && propConfirmSenha.touched) || (senha != confirmSenha && propSenha.touched && propConfirmSenha.touched)}">
+
+                    @if (senha != confirmSenha && propSenha.touched && propConfirmSenha.touched) {
+                    <div class="invalid-feedback d-block">
+                        As senhas não coincidem.
+                    </div>
+                    }
+
+                    <label for="sexo">Gênero*</label>
+                    <select class="form-control form-control-sm mt-1" id="sexo" name="sexo" [(ngModel)]="genero"
+                        #propGenero="ngModel" required
+                        [ngClass]="{'is-invalid': propGenero.invalid && propGenero.touched}">
+                        <option value="">Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                    </select>
+
+                    @if (propGenero.invalid && propGenero.touched) {
+                    <div class="invalid-feedback d-block">
+                        Por favor, selecione um gênero.
+                    </div>
+                    }
+
+                    <label for="cidade">Cidade*</label>
+                    <select class="form-control form-control-sm mb-2 mt-1" id="cidade" name="cidade"
+                        [(ngModel)]="cidade" #propCidade="ngModel" required
+                        [ngClass]="{'is-invalid': propCidade.invalid && propCidade.touched}">
+                        <option value="">Selecione</option>
+                        <option value="vitoria">Colatina</option>
+                        <option value="serra">Marilândia</option>
+                        <option value="cariacica">Linhares</option>
+                        <option value="guarapari">Vitória</option>
+                        <option value="guarapari">Serra</option>
+                        <option value="guarapari">Outra</option>
+                    </select>
+
+                    @if (propCidade.invalid && propCidade.touched) {
+                    <div class="invalid-feedback d-block">
+                        Por favor, selecione uma cidade.
+                    </div>
+                    }
+
+                    <input class="form-check-input me-2" name="termos" type="checkbox" id="check" required
+                        [(ngModel)]="termos" #propTermos="ngModel">
+                    <label class="form-check-label" for="check">
+                        Eu aceito os termos e condições*
+                    </label>
+
+                    @if (!termos && propTermos.touched) {
+                    <div class="invalid-feedback d-block mb-2">
+                        Por favor, aceite os termos e condições.
+                    </div>
+                    }
+
+                    <div class="col border-1 mt-2 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
